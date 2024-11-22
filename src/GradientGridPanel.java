@@ -81,9 +81,57 @@ public class GradientGridPanel extends JPanel
     {
         // suggested variable to track whether you have duplicate numbers in the grid. This defaults to all falses.
         boolean[] used = new boolean[GRID_SIZE * GRID_SIZE];
-
+        boolean isGridValid = true;
         //TODO: you write this method.
-        return false;
+        for (int row=0; row<GRID_SIZE; row++) {
+            int rowIteration;
+            int iStarter;
+            if (row == 0) {
+                rowIteration = 2;
+                iStarter = 0;
+            } else if (row == GRID_SIZE-1) {
+                rowIteration = 1;
+                iStarter = -1;
+            } else {
+                rowIteration = 2;
+                iStarter = -1;
+            }
+            for (int col=0; col<GRID_SIZE; col++) {
+                int colIteration;
+                int jStarter;
+                if (col == 0) {
+                    colIteration = 2;
+                    jStarter = 0;
+                } else if (col == GRID_SIZE-1) {
+                    colIteration = 1;
+                    jStarter = -1;
+                } else {
+                    colIteration = 2;
+                    jStarter = -1;
+                }
+                boolean isValid = false;
+                for (int i = iStarter; i<rowIteration; i++) {
+                    for (int j = jStarter; j<colIteration; j++) {
+                        if (row != 0 && col != 0) {
+                            if (myGrid[row][col] == myGrid[row+i][col+j]-1) {
+                                isValid = true;
+                            }
+                        }
+                        else {
+                            isValid = true;
+                        }
+
+                        System.out.println(isValid);
+                    }
+                }
+                if (isValid == false) {
+                    isGridValid = false;
+                }
+                used[row*col] = true;
+            }
+        }
+
+        return isGridValid;
     }
 
     /**
