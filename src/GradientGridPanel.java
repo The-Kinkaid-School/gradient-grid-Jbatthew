@@ -70,7 +70,20 @@ public class GradientGridPanel extends JPanel
 
             }
     }
-
+    public int[] iterationAmount(int num) {
+        int[] returnValue = new int[2];
+        if (num == 0) {
+            returnValue[0] = 2;
+            returnValue[1] = 0;
+        } else if (num == GRID_SIZE-1) {
+            returnValue[0] = 1;
+            returnValue[1] = -1;
+        } else {
+            returnValue[0] = 2;
+            returnValue[1] = -1;
+        }
+        return returnValue;
+    }
     /**
      * checks that each cell is adjacent (N, S, E, W, NE, SE, SW, NW) to a cell with
      * the number below it (unless the original cell holds zero), and every number 0-255 is used exactly once.
@@ -82,36 +95,13 @@ public class GradientGridPanel extends JPanel
         // suggested variable to track whether you have duplicate numbers in the grid. This defaults to all falses.
         boolean[] used = new boolean[GRID_SIZE * GRID_SIZE];
         boolean isGridValid = true;
-        //TODO: you write this method.
         for (int row=0; row<GRID_SIZE; row++) {
-            int rowIteration;
-            int iStarter;
-            if (row == 0) {
-                rowIteration = 2;
-                iStarter = 0;
-            } else if (row == GRID_SIZE-1) {
-                rowIteration = 1;
-                iStarter = -1;
-            } else {
-                rowIteration = 2;
-                iStarter = -1;
-            }
+            int[] rowIteration = iterationAmount(row);
             for (int col=0; col<GRID_SIZE; col++) {
-                int colIteration;
-                int jStarter;
-                if (col == 0) {
-                    colIteration = 2;
-                    jStarter = 0;
-                } else if (col == GRID_SIZE-1) {
-                    colIteration = 1;
-                    jStarter = -1;
-                } else {
-                    colIteration = 2;
-                    jStarter = -1;
-                }
+                int[] colIteration = iterationAmount(col);
                 boolean isValid = false;
-                for (int i = iStarter; i<rowIteration; i++) {
-                    for (int j = jStarter; j<colIteration; j++) {
+                for (int i = rowIteration[1]; i<rowIteration[0]; i++) {
+                    for (int j = colIteration[1]; j<colIteration[0]; j++) {
                         if (row != 0 && col != 0) {
                             if (myGrid[row][col] == myGrid[row+i][col+j]-1) {
                                 isValid = true;
@@ -153,6 +143,9 @@ public class GradientGridPanel extends JPanel
                 break;
             case 3:
                 // TODO write code for case 2, either here or in its own method.
+                for (int row = 0; row < GRID_SIZE; row++) {
+
+                }
                 break;
             case 4:
                 // TODO write code for case 3, either here or in its own method.
