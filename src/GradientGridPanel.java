@@ -111,7 +111,6 @@ public class GradientGridPanel extends JPanel
                             isValid = true;
                         }
 
-                        System.out.println(isValid);
                     }
                 }
                 if (isValid == false) {
@@ -143,8 +142,22 @@ public class GradientGridPanel extends JPanel
                 break;
             case 3:
                 // TODO write code for case 2, either here or in its own method.
+                int currentNum = 0;
+                int adder = 1;
                 for (int row = 0; row < GRID_SIZE; row++) {
-
+                    for (int col = 0; col < GRID_SIZE; col++) {
+                        myGrid[row][col] = currentNum;
+                        currentNum += adder;
+                    }
+                    if (row%2 == 0) {
+                        System.out.println("real!");
+                        adder = -1;
+                        currentNum += 15;
+                    }
+                    else {
+                        adder = 1;
+                        currentNum += 17;
+                    }
                 }
                 break;
             case 4:
